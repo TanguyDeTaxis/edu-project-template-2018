@@ -17,7 +17,7 @@ class Yolo extends Component {
 
 class Swag extends Component {
     render() {
-        return(<h1>Swag</h1>);
+        return(<h1>MALGOUYRES FOR LIFE</h1>);
     }
 };
 
@@ -29,7 +29,7 @@ export default class App extends Component {
                   <div>
                     <Route path="/" component={Yolo}>
                     </Route>
-                    <Route path="/new" component={Swag}>
+                    <Route path="/mille" component={Swag}>
                     </Route>
                   </div>
                 </Router>
