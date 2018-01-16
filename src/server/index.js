@@ -1,7 +1,4 @@
-const express = require('express');
-const api = require('./api.js');
-const config = require('./config.js');
-
+const express = require('express')
 const app = express()
 
 app.get('/', function (req, res) {
