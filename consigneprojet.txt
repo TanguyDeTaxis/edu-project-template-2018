@@ -1,0 +1,55 @@
+
+Fonctionnalités:
+    - Create
+    - List
+    - Get 
+    - Delete
+    - Update
+
+API
+
+    localhost/api/
+    localhost/______ -> HTML
+    POST localhost/api/episodes (pour créer un épisode) JSON
+    GET localhost/api/episodes -> JSON de tous les épisodes
+    GET localhost/api/episodes/id -> JSON l'épisode
+    DELETE localhost/api/episodes/id -> renvoie rien
+    PUT localhost/api/episodes/id -> JSON l'épisode
+
+
+JSON
+
+    un épisode
+    { 
+        "id"   : "__", // UUID générer depuis le back
+        "name" : "__",
+        "code" : "__", // S01E02
+        "note" : "___", // 0 à 10
+    }
+
+    les épisodes
+    [
+        { 
+            "id"   : "__",
+            "name" : "__",
+            "code" : "__",
+            "note" : "___",
+        },
+        { 
+        "id"   : "__",
+        "name" : "__",
+        "code" : "__",
+        "note" : "___",
+        }
+    ]
+
+PAS DE BDD -> on va utiliser des fichiers
+    -> un fichier par épisode
+    -> fonction pour écrire / lire dans les fichiers
+
+BACK -> nodeJS
+FRONT -> React
+
+edu.dioudaunnat.fr
+
+npm run startDev
