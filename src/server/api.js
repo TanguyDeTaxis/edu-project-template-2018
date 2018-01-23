@@ -10,9 +10,19 @@ router.use(function timeLog(req, res, next) {
 });
 // define the home page route
 router.get('/', function(req, res) {
-    var file = fs.readFileSync("data/episodes.json", "utf-8");
-    var json = JSON.parse(file);
-    res.send(json);
+   // var file = fs.readFileSync("data/episodes.json", "utf-8");
+   var fileReaded = [];
+
+   fs.readdir("data", function (err, files) {
+    if (err) {
+        throw err;
+    }
+    
+    files.forEach(function (file) {
+        fileReaded.push(JSON.parse(fs.readFileSync("data/"+file)));
+    });
+    res.send(fileReaded);
+  });
 });
 
 router.post('/', function (req, res) {
