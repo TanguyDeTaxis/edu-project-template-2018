@@ -34,10 +34,18 @@ router.post('/', function (req, res) {
 });
 
 router.put('/:id', function (req, res) {
-
-
+   let id = req.body.id
+   fs.writeFile("data/" + "episode" + id + ".json", JSON.stringify(req.body), function( error ) {
+      throw error;
+   });
+   res.send(req.body);
 });
 
+router.get('/:id', function (req, res) {
+   let id = req.param('id');
+   var file = JSON.parse(fs.readFileSync("data/" + "episode" + id + ".json"));
+   res.send(file);
+});
 
 module.exports = router
 
