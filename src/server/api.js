@@ -2,6 +2,7 @@ const express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 var fs = require("fs")
+const uuidv4 = require('uuid/v4');
 
 // middleware that is specific to this router
 router.use(function timeLog(req, res, next) {
@@ -10,7 +11,6 @@ router.use(function timeLog(req, res, next) {
 });
 // define the home page route
 router.get('/', function(req, res) {
-   // var file = fs.readFileSync("data/episodes.json", "utf-8");
    var fileReaded = [];
 
    fs.readdir("data", function (err, files) {
@@ -26,7 +26,16 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function (req, res) {
+  let uuid = uuidv4();
+   fs.writeFile("data/" + "episode" + uuid + ".json", JSON.stringify(req.body), function( error ) {
+      throw error;
+   });
    res.send(req.body);
+});
+
+router.put('/:id', function (req, res) {
+
+
 });
 
 
