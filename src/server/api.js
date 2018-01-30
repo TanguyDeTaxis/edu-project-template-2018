@@ -11,7 +11,6 @@ router.use(function timeLog(req, res, next) {
 });
 // define the home page route
 router.get('/', function (req, res) {
-    var fileReaded = [];
 
     //find all episodes
     fs.readdir("data", function (err, files) {
@@ -19,10 +18,21 @@ router.get('/', function (req, res) {
             throw err;
         }
 
+        let promises = [];
+
         files.forEach(function (file) {
-            fileReaded.push(JSON.parse(fs.readFileSync("data/" + file)));
-        });
-        res.send(fileReaded);
+            let p = new Promise((resolve, reject) => {
+                fs.readFile("data/" + file, (err, data) => {
+                    resolve(JSON.parse(data));
+                });
+            });
+            promises.push(p);
+        })
+
+        Promise.all(promises)
+            .then((data) => {
+                res.send(data);
+            }, () => { res.send("Erreur recupération"); });
     });
 });
 
@@ -36,7 +46,7 @@ router.post('/', function (req, res) {
 
 router.put('/:id', function (req, res) {
     let id = req.param('id');
-    
+
     fs.writeFile("data/" + "episode" + id + ".json", JSON.stringify(req.body), function (error) {
         throw error;
     });
@@ -47,9 +57,10 @@ router.get('/:id', function (req, res) {
     let id = req.param('id');
 
     //find one episode by id
-    var file = JSON.parse(fs.readFileSync("data/" + "episode" + id + ".json"));
+    var file = JSON.parse(fs.readFile("data/" + "episode" + id + ".json", (err, data) => {
+        res.send(file);
+    }));
 
-    res.send(file);
 });
 
 router.delete('/:id', function (req, res) {
