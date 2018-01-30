@@ -54,3 +54,6 @@ FRONT -> React
 edu.dioudaunnat.fr
 
 npm run startDev
+
+frisby -> permet de tester ses APIs
+https://www.frisbyjs.com/http.html

@@ -13,6 +13,7 @@ router.use(function timeLog(req, res, next) {
 router.get('/', function(req, res) {
    var fileReaded = [];
 
+   //find all episodes
    fs.readdir("data", function (err, files) {
     if (err) {
         throw err;
@@ -43,7 +44,10 @@ router.put('/:id', function (req, res) {
 
 router.get('/:id', function (req, res) {
    let id = req.param('id');
+
+   //find one episode by id
    var file = JSON.parse(fs.readFileSync("data/" + "episode" + id + ".json"));
+   
    res.send(file);
 });
 
