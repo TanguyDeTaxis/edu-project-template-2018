@@ -9,7 +9,9 @@ router.use(function timeLog(req, res, next) {
     console.log('Time: ', Date.now());
     next();
 });
-// define the home page route
+
+
+// GET ALL EPISODES
 router.get('/', function (req, res) {
 
     //find all episodes
@@ -36,6 +38,7 @@ router.get('/', function (req, res) {
     });
 });
 
+// POST ONE EPISODE
 router.post('/', function (req, res) {
     let uuid = uuidv4();
     fs.writeFile("data/" + "episode" + uuid + ".json", JSON.stringify(req.body), function (error) {
@@ -44,6 +47,7 @@ router.post('/', function (req, res) {
     res.send(req.body);
 });
 
+// UPDATE ONE EPISODE
 router.put('/:id', function (req, res) {
     let id = req.param('id');
 
@@ -53,6 +57,7 @@ router.put('/:id', function (req, res) {
     res.send(req.body);
 });
 
+// GET ONE EPISODE
 router.get('/:id', function (req, res) {
     let id = req.param('id');
 
@@ -67,6 +72,7 @@ router.get('/:id', function (req, res) {
 
 });
 
+// DELETE ONE EPISODE
 router.delete('/:id', function (req, res) {
     let id = req.param('id');
 
