@@ -57,9 +57,13 @@ router.get('/:id', function (req, res) {
     let id = req.param('id');
 
     //find one episode by id
-    var file = JSON.parse(fs.readFile("data/" + "episode" + id + ".json", (err, data) => {
-        res.send(file);
-    }));
+    let p = new Promise((resolve, reject) => {
+        fs.readFile("data/" + "episode" + id + ".json", (err, data) => {
+            resolve(JSON.parse(data))
+        });
+    }).then((data) => {
+        res.send(data);
+    }, () => { res.send("Erreur recupération"); });
 
 });
 
