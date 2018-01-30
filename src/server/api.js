@@ -35,7 +35,8 @@ router.post('/', function (req, res) {
 });
 
 router.put('/:id', function (req, res) {
-    let id = req.body.id
+    let id = req.param('id');
+    
     fs.writeFile("data/" + "episode" + id + ".json", JSON.stringify(req.body), function (error) {
         throw error;
     });
