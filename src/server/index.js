@@ -1,14 +1,15 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const api = require('./api.js');
+const config = require('./config.js');
+const bodyParser = require('body-parser');
+const app = express();
 
-app.get('/', function (req, res) {
-    res.send('mille xD')
-})
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-app.get('/coucou', function (req, res) {
-    res.send('TU MA DIS COUCOU C DROLE CA!')
-})
+app.use('/api/episodes', api);
 
-app.listen(3000, function () {
-    console.log('Example app listening on port 3000!')
+
+app.listen(config.port, function () {
+    console.log('Example app listening on port ' + config.port + '!')
 })
