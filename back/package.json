@@ -41,6 +41,7 @@
     "fs": "^0.0.1-security",
     "json-parser": "^1.1.5",
     "node-find-files": "0.0.4",
-    "node-uuid": "^1.4.7"
+    "node-uuid": "^1.4.7",
+    "uuid-v4": "^0.1.0"
   }
 }
