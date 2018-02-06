@@ -57,3 +57,15 @@ npm run startDev  -> http://localhost:4000
 
 frisby -> permet de tester ses APIs
 https://www.frisbyjs.com/http.html
+
+
+****BACK
+
+    npm run startDev
+        -> permet de lancer un serveur qui surcharge le serveur du back-end : Webpack
+        -> idée: faire communiquer le serveur webpack (port 4000) avec le back-end (port 3000)
+        -> webpack fait le pont entre le front et le back
+
+****FRONT
+
+    yarn start
