@@ -29,10 +29,14 @@ exports.getEpisodes = function (callback) {
 exports.createEpisode = function(body, callback){
 
     let uuid = uuidv4();
-    fs.writeFile("data/" + "episode" + uuid + ".json", JSON.stringify(body), function (error) {
-        throw error;
+    let yes = body;
+    yes.id = uuid;
+    fs.writeFile("data/" + "episode" + uuid + ".json", JSON.stringify(yes), function (error) {
+        if(error !== null)
+           throw error;
+
     });
-    callback(body);
+    callback(yes);
 
 }
 
@@ -40,7 +44,8 @@ exports.editEpisode = function(id, body,  callback){
 
 
     fs.writeFile("data/" + "episode" + id + ".json", JSON.stringify(body), function (error) {
-        throw error;
+        if(error !== null)
+            throw error;
     });
     callback(body);
 
