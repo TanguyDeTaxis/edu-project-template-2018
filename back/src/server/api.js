@@ -3,6 +3,7 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var fs = require("fs")
 const uuidv4 = require('uuid-v4');
+const app = express()
 
 // middleware that is specific to this router
 router.use(function timeLog(req, res, next) {
@@ -13,6 +14,11 @@ router.use(function timeLog(req, res, next) {
 
 // GET ALL EPISODES
 router.get('/', function (req, res) {
+
+   
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
 
     //find all episodes
     fs.readdir("data", function (err, files) {
