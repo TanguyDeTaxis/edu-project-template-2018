@@ -8,7 +8,7 @@ class MainComponent extends React.Component {
   }
 
    constructor(props) {
-    super(props)
+    super(props);
   }
   
 

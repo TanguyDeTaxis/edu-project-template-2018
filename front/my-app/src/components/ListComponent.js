@@ -13,9 +13,9 @@ class ListComponent extends React.Component {
         <div>
 
         {episodes.map(ep =>
-          <div>
-            {ep}
-          </div>
+          <li key={ep.id}>
+            <p> Code : {ep.code}</p> <p> Name : {ep.name}</p> <p>Note : {ep.note}</p>
+          </li>
         )}
         </div>
       )
@@ -31,9 +31,11 @@ class ListComponent extends React.Component {
   }
 
   componentDidMount() {
-    fetch("/api/episodes")
+    
+    fetch("http://localhost:4000/api/episodes")
       .then(response => response.json())
-      .then(data => this.setState({ episodes: data }));
+      .then(data => { console.log("data", data); this.setState({ episodes: data }) })
+      .catch( err => console.log("err", err));
   }
   
 
