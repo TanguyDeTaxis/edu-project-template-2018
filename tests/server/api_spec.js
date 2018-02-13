@@ -14,15 +14,8 @@ it ('Create a valid episode',
             .expect('status',200)
             .then(function (res) {
                 let id = res._body.id;
-
                 frisby.get(URL+"/"+id)
-                    .expect('status', 200)
-                    .expect('jsonTypes', {
-                        id: Joi.string(),
-                        name: Joi.string(),
-                        code: Joi.string(),
-                        note: Joi.number()
-                    });
+                    .expect('status', 200);
 
                 frisby.put(URL+"/"+id, {
                     id: res._body.id,
@@ -41,14 +34,27 @@ it ('Create a valid episode',
             .done(done);
     });
 
-it("Create fake episode",
+it("Create a episode without all fields",
     function (done) {
         frisby
             .post(URL, {
                 name: "ALEXIS MEURT AINSI QUE TOUTE SA FAMILLE",
                 code: "S03E01"
             })
-            .expect('status',404)
+            .expect('status', 404)
             .done(done);
     });
+
+    it("Create a episode without false fields",
+        function (done) {
+            frisby
+                .post(URL, {
+                    name: "ALEXIS MEURT AINSI QUE TOUTE SA FAMILLE",
+                    code: 100,
+                    note: "20"
+                })
+                .expect('status', 404)
+                .done(done);
+        });
+
 });

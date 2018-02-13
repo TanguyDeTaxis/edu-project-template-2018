@@ -51,8 +51,10 @@ router.put('/:id', function (req, res) {
 // GET ONE EPISODE
 router.get('/:id', function (req, res) {
 
-    episode.getOneEpisode(req.params.id, function(data){
-        if(data == false) res.status(404).send("pitié");
+    episode.getOneEpisode(req.params.id, function(err, data){
+        if(err) {
+            res.status(404).send(data);
+        }
         else{
             res.send(data);
         }
@@ -63,9 +65,13 @@ router.get('/:id', function (req, res) {
 // DELETE ONE EPISODE
 router.delete('/:id', function (req, res) {
 
-    episode.deleteEpisode(req.params.id,  function (data) {
-
-        res.send(data);
+    episode.deleteEpisode(req.params.id,  function (err, data) {
+        if(err){
+            res.status(404).send(data);
+        }
+        else{
+            res.send(data);
+        }
     });
 
 });

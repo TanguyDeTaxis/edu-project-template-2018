@@ -22,7 +22,7 @@ exports.getEpisodes = function (callback) {
         Promise.all(promises)
             .then((data) => {
                 callback(data);
-            }, () => { callback("Erreur recupération"); });
+            }, (err) => { callback("Erreur recupération"); });
     });
 };
 
@@ -65,39 +65,39 @@ exports.editEpisode = function(id, body,  callback){
 
 exports.getOneEpisode = function(id, callback) {
 
-    if(typeof id === "number") {
+    if(typeof id === "string") {
         //find one episode by id
         let p = new Promise((resolve, reject) => {
             fs.readFile("data/" + "episode" + id + ".json", (err, data) => {
                 if (err) {
-                    resolve(false);
+                    reject("Récupération d'un épisode impossible");
                 }
                 else {
                     resolve(JSON.parse(data))
                 }
             });
         }).then((data) => {
-            callback(data);
+            callback(false, data);
 
-        }, () => {
-            callback(false);
+        }, (data) => {
+            callback(true, data);
         });
     }
     else{
-        callback("Id incorrect");
+        callback(true, "Id incorrect");
     }
 }
 
 exports.deleteEpisode = function (id, callback) {
     if(typeof id === "string" ) {
         fs.unlink("data/" + "episode" + id + ".json", (err) => {
-            if (err) callback(false);
+            if (err) callback(true, "Erreur lors de la suppression");
             console.log('successfully deleted /tmp/hello');
         });
 
-        callback("deleted");
+        callback(false, "deleted");
     }
     else{
-        callback("Id incorrect");
+        callback(true, "Id incorrect");
     }
 }
