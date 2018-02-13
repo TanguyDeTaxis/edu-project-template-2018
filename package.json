@@ -17,7 +17,7 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
     "chokidar": "^1.6.1",
-    "frisby": "^0.8.5",
+    "frisby": "^2.0",
     "html-webpack-plugin": "^2.26.0",
     "jasmine-node": "^1.14.5",
     "react": "^15.4.2",

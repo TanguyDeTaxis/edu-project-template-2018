@@ -7,8 +7,6 @@ const port = 4598;
 
 const pathData = path.join(__dirname, 'server/data');
 
-fs.mkdir(pathData);
-
 const server = child_process.spawn(
     'node',
     [path.join(__dirname, '../src/server/index.js')],

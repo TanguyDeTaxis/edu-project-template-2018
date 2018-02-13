@@ -24,19 +24,26 @@ router.get('/', function (req, res) {
 // POST ONE EPISODE
 router.post('/', function (req, res) {
 
-    episode.createEpisode(req.body, function (data) {
-
-        res.send(data);
+    episode.createEpisode(req.body, function (err, data) {
+        if(err){
+            res.status(404).send(data);
+        }
+        else{
+            res.send(data);
+        }
     });
-
 });
 
 // UPDATE ONE EPISODE
 router.put('/:id', function (req, res) {
 
-    episode.editEpisode(req.params.id, req.body, function (data) {
-
-        res.send(data);
+    episode.editEpisode(req.params.id, req.body, function (err, data) {
+        if(err){
+            res.status(404).send(data);
+        }
+        else{
+            res.send(data);
+        }
     });
 
 });
@@ -45,7 +52,10 @@ router.put('/:id', function (req, res) {
 router.get('/:id', function (req, res) {
 
     episode.getOneEpisode(req.params.id, function(data){
-        res.send(data);
+        if(data == false) res.status(404).send("pitié");
+        else{
+            res.send(data);
+        }
     });
 
 });

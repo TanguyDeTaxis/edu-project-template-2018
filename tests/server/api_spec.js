@@ -1,46 +1,54 @@
 const frisby = require('frisby');
+const Joi = frisby.Joi;
+const URL = 'http://localhost:'+process.env.SERVER_PORT+'/api/episodes';
 
-const URL = 'http://localhost:'+process.env.SERVER_PORT+'/notes';
-
-getEmpty = frisby.create('GET all notes')
-    .get(URL+'/')
-    .expectStatus(204)
-    .after(function() {
-        frisby.create('POST a note')
-            .post(URL+'/', {
-                title: "My Note",
-                content: "Lorem ipsum dolor sit amet"
-            }, {json: true})
-            .expectStatus(201)
-            .expectJSONTypes({
-                id: String
+describe('Posts', function () {
+it ('Create a valid episode',
+    function (done) {
+        frisby
+            .post(URL, {
+                name: "ALEXIS MEURT AINSI QUE TOUTE SA FAMILLE",
+                code: "S03E01",
+                note: 20
             })
-            .afterJSON(function(note) {
-                frisby.create('Get a note')
-                    .get(URL+'/'+note.id)
-                    .expectStatus(200)
-                    .expectJSONTypes({
-                        id: String,
-                        title: String,
-                        content: String,
-                        date: Number
-                    })
-                    .expectJSON({
-                        title: "My Note",
-                        content: "Lorem ipsum dolor sit amet",
-                        date: Math.floor(Date.now() / 1000),
-                        id: note.id
-                    })
-                    .afterJSON(function(note) {
-                        frisby.create('Delete a note')
-                            .delete(URL+'/'+note.id)
-                            .expectStatus(204)
-                            .toss();
-                    })
-                    .toss();
-                frisby.create('Get a unknow note')
-                    .get(URL+'/aaaa')
-                    .expectStatus(404)
-                    .toss();
-            }).toss();
-    }).toss();
+            .expect('status',200)
+            .then(function (res) {
+                let id = res._body.id;
+
+                frisby.get(URL+"/"+id)
+                    .expect('status', 200)
+                    .expect('jsonTypes', {
+                        id: Joi.string(),
+                        name: Joi.string(),
+                        code: Joi.string(),
+                        note: Joi.number()
+                    });
+
+                frisby.put(URL+"/"+id, {
+                    id: res._body.id,
+                    name: "ALEXIS MEURT IVRE",
+                    code: "S03E01",
+                    note: 18
+                })
+                    .expect('status', 200);
+
+                frisby.del(URL+"/"+id)
+                    .expect('status', 200);
+
+                return frisby.get(URL+"/iBZGOQUHGO")
+                    .expect('status', 404);
+            })
+            .done(done);
+    });
+
+it("Create fake episode",
+    function (done) {
+        frisby
+            .post(URL, {
+                name: "ALEXIS MEURT AINSI QUE TOUTE SA FAMILLE",
+                code: "S03E01"
+            })
+            .expect('status',404)
+            .done(done);
+    });
+});
