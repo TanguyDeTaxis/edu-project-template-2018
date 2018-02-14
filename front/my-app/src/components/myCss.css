@@ -1,0 +1,14 @@
+.inline_div{
+    display: inline-flex;
+}
+
+.episodes_div{
+    padding: 2%;
+    
+    width: 60%;
+}
+
+.form_div{
+    padding: 2%;
+    width: 20%;
+}

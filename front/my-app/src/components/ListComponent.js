@@ -1,6 +1,6 @@
-
 import React from 'react';
-
+import AddComponent from './AddComponent';
+import styles from './myCss.css';
 
 class ListComponent extends React.Component {
   render() {
@@ -10,13 +10,25 @@ class ListComponent extends React.Component {
       console.log("episodes", episodes);
 
       return (
-        <div>
+        <div className="inline_div">
+        
+        <div className="episodes_div">
+          <h1>Episodes</h1>
 
-        {episodes.map(ep =>
-          <li key={ep.id}>
-            <p> Code : {ep.code}</p> <p> Name : {ep.name}</p> <p>Note : {ep.note}</p>
-          </li>
-        )}
+          {episodes.map(ep =>
+            <li key={ep.id}>
+              <p> Code : {ep.code}</p> <p> Name : {ep.name}</p> <p>Note : {ep.note}</p>
+            </li>
+          )}
+
+        </div>
+
+        <div className="form_div">
+
+          <AddComponent episodes={this.state.episodes}/>
+         
+        </div>
+        
         </div>
       )
     }
@@ -26,7 +38,7 @@ class ListComponent extends React.Component {
     super(props);
 
     this.state = {
-      episodes: [],
+      episodes: []
     };
   }
 
@@ -38,7 +50,6 @@ class ListComponent extends React.Component {
       .catch( err => console.log("err", err));
   }
   
-
 }
 
 export default ListComponent;

@@ -15,11 +15,6 @@ router.use(function timeLog(req, res, next) {
 // GET ALL EPISODES
 router.get('/', function (req, res) {
 
-   
-    res.set("Access-Control-Allow-Origin", "*");
-    res.set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
-
     //find all episodes
     fs.readdir("data", function (err, files) {
         if (err) {
@@ -46,9 +41,14 @@ router.get('/', function (req, res) {
 
 // POST ONE EPISODE
 router.post('/', function (req, res) {
+
     let uuid = uuidv4();
+    req.body.id = uuid;
+
     fs.writeFile("data/" + "episode" + uuid + ".json", JSON.stringify(req.body), function (error) {
-        throw error;
+        if (error) {
+            throw error;
+        }
     });
     res.send(req.body);
 });
@@ -65,6 +65,7 @@ router.put('/:id', function (req, res) {
 
 // GET ONE EPISODE
 router.get('/:id', function (req, res) {
+
     let id = req.param('id');
 
     //find one episode by id
