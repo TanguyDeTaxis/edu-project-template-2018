@@ -7,6 +7,8 @@ class ListComponent extends React.Component {
 
       const { episodes } = this.state;
 
+      var updateEpisodesList  =   this.updateEpisodesList;
+
       console.log("episodes", episodes);
 
       return (
@@ -25,7 +27,7 @@ class ListComponent extends React.Component {
 
         <div className="form_div">
 
-          <AddComponent episodes={this.state.episodes}/>
+          <AddComponent updateEpisodesList={updateEpisodesList.bind(this)}/>
          
         </div>
         
@@ -37,17 +39,22 @@ class ListComponent extends React.Component {
   constructor(props) {
     super(props);
 
+    this.updateEpisodesList  = this.updateEpisodesList.bind(this);
+
     this.state = {
       episodes: []
     };
   }
 
-  componentDidMount() {
-    
+  updateEpisodesList(){
     fetch("http://localhost:4000/api/episodes")
       .then(response => response.json())
       .then(data => { console.log("data", data); this.setState({ episodes: data }) })
       .catch( err => console.log("err", err));
+  }
+
+  componentDidMount() {
+    this.updateEpisodesList();
   }
   
 }

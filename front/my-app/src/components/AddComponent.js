@@ -42,7 +42,10 @@ class AddComponent extends React.Component {
   } 
 
   handleSubmit(event) {
+
     event.preventDefault();
+
+    var updateEpisodesList  =   this.props.updateEpisodesList;
 
     fetch('http://localhost:4000/api/episodes', {
         method: 'POST',
@@ -55,7 +58,8 @@ class AddComponent extends React.Component {
             'Content-Type': 'application/json',
         }
     }).then(res => {
-        console.log("res", res)
+        console.log("res", res);
+        updateEpisodesList();
     }).catch(err => console.log("error", err));
 
   }
