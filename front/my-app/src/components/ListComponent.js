@@ -17,11 +17,13 @@ class ListComponent extends React.Component {
         <div className="episodes_div">
           <h1>Episodes</h1>
 
+          <div className="episodes_block">
           {episodes.map(ep =>
-            <li key={ep.id}>
-              <p> Code : {ep.code}</p> <p> Name : {ep.name}</p> <p>Note : {ep.note}</p>
-            </li>
+            <div className="item_list" key={ep.id}>
+              <span> Code : {ep.code}</span> <span> Name : {ep.name}</span> <span>Note : {ep.note}</span>
+            </div>
           )}
+          </div>
 
         </div>
 

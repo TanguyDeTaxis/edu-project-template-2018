@@ -4,11 +4,21 @@
 
 .episodes_div{
     padding: 2%;
-    
     width: 60%;
 }
 
+.episodes_block{
+    display: flex;
+    flex-direction: column;
+    justify-content: center
+}
+
 .form_div{
-    padding: 2%;
+    margin: 6%;
     width: 20%;
+}
+
+.item_list{
+    display: flex;
+    justify-content: space-between
 }
