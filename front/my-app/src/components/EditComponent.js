@@ -19,7 +19,7 @@ class EditComponent extends React.Component {
             Note:
                   <input type="number" value={this.state.episode.note} onChange={this.handleChangeNote} />
           </label>
-          <input type="submit" value="Valider" />
+          <input type="submit" value="Validate" />
         </form>
 
         <img onClick={this.clickBack} className="back_button" src={back_icon} />

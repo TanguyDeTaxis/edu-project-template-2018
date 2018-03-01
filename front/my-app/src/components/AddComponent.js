@@ -16,7 +16,7 @@ class AddComponent extends React.Component {
                   Note: 
                   <input className="form_input" type="number" value={this.state.episode.note} onChange={this.handleChangeNote} />
                 </label>
-                <input type="submit" value="Ajouter" />
+                <input type="submit" value="Add" />
           </form>
 
         </div>
