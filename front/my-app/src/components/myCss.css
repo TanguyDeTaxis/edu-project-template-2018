@@ -13,9 +13,18 @@
     justify-content: center
 }
 
+.form{
+    margin-top: 4%;
+    padding: 8% 4%;
+}
+
 .form_div{
-    margin: 6%;
+    margin: 8% 6%;
     width: 22%;
+}
+
+.form_input{
+    margin-bottom: 12%;
 }
 
 .item_list, .item_list_data{
@@ -26,7 +35,13 @@
 
 .item_list_data{
     width: 77%;
+    padding: 0 5%;
 }
+
+.item_list_data:active{
+    background-color: rgba(0,0,0,0.08);
+}
+
 
 .item_list_span{
     padding-top: 4%;
@@ -36,14 +51,18 @@
     width: 45px;
 }
 
-.delete_icon:active, .edit_icon:active{
+.button_div{
+    display: inline-flex;
+    justify-content: center;
+}
+
+.span_button{
     border-radius: 50%;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
 }
 
-.button_div{
-    display: inline-flex;
-    justify-content: center;
+.span_button:active{
+    background-color: rgba(0,0,0,0.08);
 }
 
 .back_button{

@@ -17,13 +17,13 @@ class ItemListComponent extends React.Component {
     return (
       <div className="item_list">
         <div className="item_list_data" key={ep.id} onClick={()=>this.clickItem(ep)}>
-          <div className="item_list_span"> Code : {ep.code}</div> 
           <div  className="item_list_span"> Name : {ep.name}</div> 
+          <div className="item_list_span"> Code : {ep.code}</div> 
           <div className="item_list_span">Note : {ep.note}</div>
         </div>
         <div className="button_div">
-          <span onClick={()=> this.editItem(ep)}> <img className="edit_icon" src={edit_icon} /> </span>
-          <span onClick={()=> this.deleteItem(ep.id)}> <img className="delete_icon" src={delete_icon} /> </span>
+          <span className="span_button" onClick={()=> this.editItem(ep)}> <img className="edit_icon" src={edit_icon} /> </span>
+          <span className="span_button" onClick={()=> this.deleteItem(ep.id)}> <img className="delete_icon" src={delete_icon} /> </span>
         </div>
       </div>
     )

@@ -7,14 +7,14 @@ class AddComponent extends React.Component {
 
       return (
         <div>
-              <form onSubmit={this.handleSubmit}>
+              <form className="form" onSubmit={this.handleSubmit}>
                 <label>
                   Name:
-                  <input type="text" value={this.state.episode.name} onChange={this.handleChangeName} />
+                  <input className="form_input" type="text" value={this.state.episode.name} onChange={this.handleChangeName} />
                   Code:
-                  <input type="text" value={this.state.episode.code} onChange={this.handleChangeCode} />
-                  Note:
-                  <input type="number" value={this.state.episode.note} onChange={this.handleChangeNote} />
+                  <input className="form_input" type="text" value={this.state.episode.code} onChange={this.handleChangeCode} />
+                  Note: 
+                  <input className="form_input" type="number" value={this.state.episode.note} onChange={this.handleChangeNote} />
                 </label>
                 <input type="submit" value="Ajouter" />
           </form>

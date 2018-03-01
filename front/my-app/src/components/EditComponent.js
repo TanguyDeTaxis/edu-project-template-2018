@@ -8,62 +8,64 @@ import logo from '../logo.png';
 class EditComponent extends React.Component {
   render() {
 
-      return (
-        <div>
-              <form onSubmit={this.handleSubmit}>
-                <label>
-                  Name:
+    return (
+      <div>
+        <form className="form" onSubmit={this.handleSubmit}>
+          <label>
+            Name:
                   <input type="text" value={this.state.episode.name} onChange={this.handleChangeName} />
-                  Code:
+            Code:
                   <input type="text" value={this.state.episode.code} onChange={this.handleChangeCode} />
-                  Note:
+            Note:
                   <input type="number" value={this.state.episode.note} onChange={this.handleChangeNote} />
-                </label>
-                <input type="submit" value="Ajouter" />
-          </form>
+          </label>
+          <input type="submit" value="Valider" />
+        </form>
 
-        </div>
-      )
-    }
+        <img onClick={this.clickBack} className="back_button" src={back_icon} />
 
-    handleChangeName(event) {
+      </div>
+    )
+  }
+
+  handleChangeName(event) {
     let state = this.state.episode;
     state.name = event.target.value;
-    this.setState({episode: state});
-  }  
+    this.setState({ episode: state });
+  }
 
   handleChangeCode(event) {
     let state = this.state.episode;
     state.code = event.target.value;
-    this.setState({episode: state});
-  }  
+    this.setState({ episode: state });
+  }
 
-   handleChangeNote(event) {
+  handleChangeNote(event) {
     let state = this.state.episode;
     state.note = event.target.value;
-    this.setState({episode: state});
-  } 
+    this.setState({ episode: state });
+  }
 
   handleSubmit(event) {
 
     event.preventDefault();
 
-    var updateEpisodesList  =   this.props.updateEpisodesList;
+    var updateEpisodesList = this.props.updateEpisodesList;
 
     fetch('http://localhost:4000/api/episodes/' + this.state.episode.id, {
-        method: 'PUT',
-        body: JSON.stringify({
-          name : this.state.episode.name,
-          code : this.state.episode.code,
-          note : this.state.episode.note
-        }),
-        headers: {
-            'Content-Type': 'application/json',
-        }
+      method: 'PUT',
+      body: JSON.stringify({
+        id : this.state.episode.id,
+        name: this.state.episode.name,
+        code: this.state.episode.code,
+        note: this.state.episode.note
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      }
     }).then(res => {
-        console.log("res", res);
-        updateEpisodesList();
-        this.clickBack();
+      this.clickBack();
+      updateEpisodesList();
     }).catch(err => console.log("error", err));
 
   }
@@ -99,7 +101,7 @@ class EditComponent extends React.Component {
 
   componentDidMount() {
   }
-  
+
 }
 
 export default EditComponent;
