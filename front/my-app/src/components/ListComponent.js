@@ -1,5 +1,7 @@
 import React from 'react';
 import AddComponent from './AddComponent';
+import ItemListComponent from './ItemListComponent';
+
 import styles from './myCss.css';
 
 class ListComponent extends React.Component {
@@ -19,9 +21,7 @@ class ListComponent extends React.Component {
 
           <div className="episodes_block">
           {episodes.map(ep =>
-            <div className="item_list" key={ep.id}>
-              <span> Code : {ep.code}</span> <span> Name : {ep.name}</span> <span>Note : {ep.note}</span>
-            </div>
+            <ItemListComponent updateEpisodesList={updateEpisodesList.bind(this)} episode={ep}/>
           )}
           </div>
 

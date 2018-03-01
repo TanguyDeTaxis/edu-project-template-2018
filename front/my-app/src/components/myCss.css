@@ -15,10 +15,43 @@
 
 .form_div{
     margin: 6%;
-    width: 20%;
+    width: 22%;
 }
 
-.item_list{
+.item_list, .item_list_data{
     display: flex;
-    justify-content: space-between
+    justify-content: space-between;
+    border-bottom: 1px solid lightgrey
+}
+
+.item_list_data{
+    width: 77%;
+}
+
+.item_list_span{
+    padding-top: 4%;
+}
+
+.delete_icon, .edit_icon{
+    width: 45px;
+}
+
+.delete_icon:active, .edit_icon:active{
+    border-radius: 50%;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+}
+
+.button_div{
+    display: inline-flex;
+    justify-content: center;
+}
+
+.back_button{
+    position: absolute;
+    left: 0;
+    top: 28%;
+}
+
+.padded_div{
+    padding: 2%;
 }
