@@ -1,6 +1,2 @@
-node_modules
-npm-debug.log
-build
-!data/.gitkeep
-data/*
 .idea
+back/node_modules/
