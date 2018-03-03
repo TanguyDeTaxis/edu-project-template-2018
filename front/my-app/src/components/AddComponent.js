@@ -47,7 +47,7 @@ class AddComponent extends React.Component {
 
     var updateEpisodesList  =   this.props.updateEpisodesList;
 
-    fetch('http://localhost:4000/api/episodes', {
+    fetch('http://localhost:5000/api/episodes', {
         method: 'POST',
         body: JSON.stringify({
           name : this.state.episode.name,

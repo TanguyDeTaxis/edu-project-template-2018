@@ -52,8 +52,8 @@ var server = {
             historyApiFallback: true,
             publicPath: '/',
             proxy: {
-                '/notes/*': {
-                    target: 'http://localhost:3000',
+                '/api/episodes': {
+                    target: 'http://localhost:6000',
                 }
             }
         }).listen(port, 'localhost', function (err) {

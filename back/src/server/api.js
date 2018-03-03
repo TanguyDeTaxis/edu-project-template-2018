@@ -1,9 +1,9 @@
 const express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
-var fs = require("fs")
-const uuidv4 = require('uuid-v4');
-const app = express()
+var fs = require("fs");
+
+const episode = require('./dal/episode.js');
 
 // middleware that is specific to this router
 router.use(function timeLog(req, res, next) {
@@ -11,87 +11,69 @@ router.use(function timeLog(req, res, next) {
     next();
 });
 
-
 // GET ALL EPISODES
 router.get('/', function (req, res) {
 
-    //find all episodes
-    fs.readdir("data", function (err, files) {
-        if (err) {
-            throw err;
-        }
+    episode.getEpisodes(function (data) {
 
-        let promises = [];
-
-        files.forEach(function (file) {
-            let p = new Promise((resolve, reject) => {
-                fs.readFile("data/" + file, (err, data) => {
-                    resolve(JSON.parse(data));
-                });
-            });
-            promises.push(p);
-        })
-
-        Promise.all(promises)
-            .then((data) => {
-                res.send(data);
-            }, () => { res.send("Erreur recupération"); });
+        res.send(data);
     });
+
 });
 
 // POST ONE EPISODE
 router.post('/', function (req, res) {
 
-    let uuid = uuidv4();
-    req.body.id = uuid;
-
-    fs.writeFile("data/" + "episode" + uuid + ".json", JSON.stringify(req.body), function (error) {
-        if (error) {
-            throw error;
+    episode.createEpisode(req.body, function (err, data) {
+        if(err){
+            res.status(404).send(data);
+        }
+        else{
+            res.send(data);
         }
     });
-    res.send(req.body);
 });
 
 // UPDATE ONE EPISODE
 router.put('/:id', function (req, res) {
-    let id = req.param('id');
 
-    fs.writeFile("data/" + "episode" + id + ".json", JSON.stringify(req.body), function (error) {
-        if (error) {
-            throw error;
+    episode.editEpisode(req.params.id, req.body, function (err, data) {
+        if(err){
+            res.status(404).send(data);
+        }
+        else{
+            res.send(data);
         }
     });
-    res.send(req.body);
+
 });
 
 // GET ONE EPISODE
 router.get('/:id', function (req, res) {
 
-    let id = req.param('id');
-
-    //find one episode by id
-    let p = new Promise((resolve, reject) => {
-        fs.readFile("data/" + "episode" + id + ".json", (err, data) => {
-            resolve(JSON.parse(data))
-        });
-    }).then((data) => {
-        res.send(data);
-    }, () => { res.send("Erreur recupération"); });
+    episode.getOneEpisode(req.params.id, function(err, data){
+        if(err) {
+            res.status(404).send(data);
+        }
+        else{
+            res.send(data);
+        }
+    });
 
 });
 
 // DELETE ONE EPISODE
 router.delete('/:id', function (req, res) {
-    let id = req.param('id');
 
-    fs.unlink("data/" + "episode" + id + ".json", (err) => {
-        if (err) throw err;
-        console.log('successfully deleted /tmp/hello');
+    episode.deleteEpisode(req.params.id,  function (err, data) {
+        if(err){
+            res.status(404).send(data);
+        }
+        else{
+            res.send(data);
+        }
     });
 
-    res.send("deleted");
 });
 
 module.exports = router
-

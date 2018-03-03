@@ -1,25 +1,60 @@
 const frisby = require('frisby');
+const Joi = frisby.Joi;
+const URL = 'http://localhost:'+process.env.SERVER_PORT+'/api/episodes';
 
-const uuidv4 = require('uuid/v4');
+describe('Posts', function () {
+    it ('Create a valid episode',
+        function (done) {
+            frisby
+                .post(URL, {
+                    name: "ALEXIS MEURT AINSI QUE TOUTE SA FAMILLE",
+                    code: "S03E01",
+                    note: 20
+                })
+                .expect('status',200)
+                .then(function (res) {
+                    let id = res._body.id;
+                    frisby.get(URL+"/"+id)
+                        .expect('status', 200);
 
-const URL = 'http://localhost:'+process.env.SERVER_PORT+'/api/episodes'; 
+                    frisby.put(URL+"/"+id, {
+                        id: res._body.id,
+                        name: "ALEXIS MEURT IVRE",
+                        code: "S03E01",
+                        note: 18
+                    })
+                        .expect('status', 200);
 
-it ('GET should return a status of 200 OK', function (done) {
-  frisby
-    .get(URL)
-    .expect('status', 200)
-    .done(done);
+                    frisby.del(URL+"/"+id)
+                        .expect('status', 200);
+
+                    return frisby.get(URL+"/iBZGOQUHGO")
+                        .expect('status', 404);
+                })
+                .done(done);
+        });
+
+    it("Create a episode without all fields",
+        function (done) {
+            frisby
+                .post(URL, {
+                    name: "ALEXIS MEURT AINSI QUE TOUTE SA FAMILLE",
+                    code: "S03E01"
+                })
+                .expect('status', 404)
+                .done(done);
+        });
+
+    it("Create a episode without false fields",
+        function (done) {
+            frisby
+                .post(URL, {
+                    name: "ALEXIS MEURT AINSI QUE TOUTE SA FAMILLE",
+                    code: 100,
+                    note: "20"
+                })
+                .expect('status', 404)
+                .done(done);
+        });
+
 });
-
-it ('POST should return a status of 201 Created', function (done) {
-  frisby
-    .post(URL, {
-      id: uuidv4(),
-      name: "Episode de test",
-      code: "S00E00",
-      note: 5
-    })
-    .expect('status', 201)
-    .done(done);
-});
-

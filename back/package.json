@@ -2,7 +2,7 @@
   "name": "project",
   "scripts": {
     "start": "node server.js",
-    "startDev": "node server.js",
+    "startDev": "NODE_ENV=dev node server.js",
     "build": "NODE_ENV=production node_modules/.bin/webpack",
     "watch": "NODE_ENV=dev node_modules/.bin/webpack --watch",
     "testServer": "node tests/test_server.js"
