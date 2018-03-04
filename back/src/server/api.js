@@ -13,9 +13,9 @@ router.use(function timeLog(req, res, next) {
 
 // GET ALL EPISODES
 router.get('/', function (req, res) {
-
+    console.log("mille");
     episode.getEpisodes(function (data) {
-
+        console.log(data);
         res.send(data);
     });
 
@@ -23,7 +23,6 @@ router.get('/', function (req, res) {
 
 // POST ONE EPISODE
 router.post('/', function (req, res) {
-
     episode.createEpisode(req.body, function (err, data) {
         if(err){
             res.status(404).send(data);

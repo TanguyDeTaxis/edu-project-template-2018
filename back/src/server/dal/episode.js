@@ -27,12 +27,12 @@ exports.getEpisodes = function (callback) {
 };
 
 exports.createEpisode = function(body, callback){
-
+    console.log(body);
     let uuid = uuidv4();
     let yes = body;
     yes.id = uuid;
     if(body.name && body.code && body.note
-        && typeof body.name === "string" && typeof body.code === "string" && typeof body.note === "number") {
+        && typeof body.name === "string" && typeof body.code === "string") {
 
         fs.writeFile("data/" + "episode" + uuid + ".json", JSON.stringify(yes), function (error) {
             if (error !== null)

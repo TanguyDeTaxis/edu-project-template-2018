@@ -53,7 +53,7 @@ var server = {
             publicPath: '/',
             proxy: {
                 '/api/episodes': {
-                    target: 'http://localhost:6000',
+                    target: 'http://localhost:3000',
                 }
             }
         }).listen(port, 'localhost', function (err) {
