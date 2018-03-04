@@ -7,7 +7,7 @@ describe('Posts', function () {
         function (done) {
             frisby
                 .post(URL, {
-                    name: "ALEXIS MEURT AINSI QUE TOUTE SA FAMILLE",
+                    name: "The Walking Dead",
                     code: "S03E01",
                     note: 20
                 })
@@ -19,7 +19,7 @@ describe('Posts', function () {
 
                     frisby.put(URL+"/"+id, {
                         id: res._body.id,
-                        name: "ALEXIS MEURT IVRE",
+                        name: "The Walking Really Dead",
                         code: "S03E01",
                         note: 18
                     })
@@ -38,7 +38,7 @@ describe('Posts', function () {
         function (done) {
             frisby
                 .post(URL, {
-                    name: "ALEXIS MEURT AINSI QUE TOUTE SA FAMILLE",
+                    name: "The Walking Dead",
                     code: "S03E01"
                 })
                 .expect('status', 404)
@@ -49,7 +49,7 @@ describe('Posts', function () {
         function (done) {
             frisby
                 .post(URL, {
-                    name: "ALEXIS MEURT AINSI QUE TOUTE SA FAMILLE",
+                    name: "The Walking Dead",
                     code: 100,
                     note: "20"
                 })
