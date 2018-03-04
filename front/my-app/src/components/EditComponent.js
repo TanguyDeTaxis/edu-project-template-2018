@@ -50,8 +50,6 @@ class EditComponent extends React.Component {
 
     event.preventDefault();
 
-    var updateEpisodesList = this.props.updateEpisodesList;
-
     fetch('http://localhost:4000/api/episodes/' + this.state.episode.id, {
       method: 'PUT',
       body: JSON.stringify({
@@ -65,7 +63,6 @@ class EditComponent extends React.Component {
       }
     }).then(res => {
       this.clickBack();
-      updateEpisodesList();
     }).catch(err => console.log("error", err));
 
   }
